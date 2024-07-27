@@ -1,0 +1,51 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.9, pytest-8.3.2, pluggy-1.5.0 -- /home/lyapin/Documents/work_python/atom_auto_test_task/venv/bin/python3.11
+cachedir: .pytest_cache
+rootdir: /home/lyapin/Documents/work_python/atom_auto_test_task
+collecting ... collected 13 items
+
+tests/test_box.py::TestPositive::test_info PASSED                        [  7%]
+tests/test_box.py::TestPositive::test_bears PASSED                       [ 15%]
+tests/test_box.py::TestPositive::test_post_bear PASSED                   [ 23%]
+tests/test_box.py::TestPositive::test_put_bear PASSED                    [ 30%]
+tests/test_box.py::TestPositive::test_delete_bear PASSED                 [ 38%]
+tests/test_box.py::TestPositive::test_delete_all_bear PASSED             [ 46%]
+tests/test_box.py::TestNegative::test_info PASSED                        [ 53%]
+tests/test_box.py::TestNegative::test_bears FAILED                       [ 61%]
+tests/test_box.py::TestNegative::test_post_bear PASSED                   [ 69%]
+tests/test_box.py::TestNegative::test_put_bear PASSED                    [ 76%]
+tests/test_box.py::TestNegative::test_delete_bear FAILED                 [ 84%]
+tests/test_box.py::TestNegative::test_delete_all_bear PASSED             [ 92%]
+tests/test_box.py::TestBrake::test_info PASSED                           [100%]
+
+=================================== FAILURES ===================================
+___________________________ TestNegative.test_bears ____________________________
+
+self = <test_box.TestNegative object at 0x79b9b1b7b110>
+bear = 'http://172.17.0.1:8091/bear/165745980796845098976545340-9876540-987654398765430-987654309876543'
+
+    def test_bears(self, bear):
+        bear = bear + "/165745980796845098976545340-9876540-987654398765430-987654309876543"
+        response = requests.get(bear)
+>       assert response.status_code == 404
+E       assert 200 == 404
+E        +  where 200 = <Response [200]>.status_code
+
+tests/test_box.py:54: AssertionError
+________________________ TestNegative.test_delete_bear _________________________
+
+self = <test_box.TestNegative object at 0x79b9b1b84450>
+bear = 'http://172.17.0.1:8091/bear/8765643786564487865437654328765432'
+
+    def test_delete_bear(self, bear):
+        bear = bear + "/" + str(8765643786564487865437654328765432)
+        delete_response = requests.delete(bear)
+>       assert delete_response.status_code == 404
+E       assert 200 == 404
+E        +  where 200 = <Response [200]>.status_code
+
+tests/test_box.py:69: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_box.py::TestNegative::test_bears - assert 200 == 404
+FAILED tests/test_box.py::TestNegative::test_delete_bear - assert 200 == 404
+=================== 2 failed, 11 passed in 102.94s (0:01:42) ===================
