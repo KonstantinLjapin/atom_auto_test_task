@@ -1,0 +1,12 @@
+version: '3.3'
+
+services:
+  atom:
+    image: azshoo/alaska:1.0
+    container_name: atom
+    hostname: atom
+    restart: always
+    volumes:
+      - ./dump/atom:/data
+    ports:
+      - "8091:8091"
